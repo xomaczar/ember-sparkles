@@ -1,6 +1,4 @@
-{{#d3-graph classNames="ember-sparkles--grouped-bar-chart" as |d3|}}
-
-  {{#with (hash
+{{let
     enterRect=(pipe
       (d3-append 'rect')
       (d3-attr 'width' 0)
@@ -29,10 +27,11 @@
       (d3-style 'opacity' 0)
       (d3-remove)
     )
+}}
 
-  ) as |renderOptions|}}
+{{#d3-graph classNames="ember-sparkles--grouped-bar-chart" as |d3|}}
 
-    {{d3.graph (pipe
+  {{d3.graph (pipe
       (d3-select-all '.rect-group')
       (d3-data data)
       (d3-join
@@ -43,7 +42,7 @@
           (d3-select-all 'rect')
           (d3-data outputKey)
           (d3-join
-            enter=(pipe renderOptions.enterRect renderOptions.updateRect)
+            enter=(pipe enterRect updateRect)
           )
         )
         update=(pipe
@@ -51,9 +50,9 @@
             (d3-select-all 'rect')
             (d3-data outputKey)
             (d3-join
-              enter=(pipe renderOptions.enterRect renderOptions.updateRect)
-              update=renderOptions.updateRect
-              exit=renderOptions.exitRect
+              enter=(pipe enterRect updateRect)
+              update=updateRect
+              exit=exitRect
             )
           ))
           (if with-transition (d3-transition transition) (d3-noop))
@@ -64,8 +63,8 @@
             (d3-select-all 'rect')
             (d3-data outputKey)
             (d3-join
-              update=renderOptions.exitRect
-              exit=renderOptions.exitRect
+              update=exitRect
+              exit=exitRect
             )
           ))
           (if with-transition (d3-transition transition) (d3-noop))
@@ -73,5 +72,4 @@
         )
     ))}}
 
-  {{/with}}
 {{/d3-graph}}

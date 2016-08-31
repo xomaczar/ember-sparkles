@@ -61,7 +61,8 @@
     "ember-math-helpers": "1.2.2",
     "ember-reactive-helpers": "0.3.7",
     "ember-resize": "0.0.13",
-    "ember-truth-helpers": "1.2.0"
+    "ember-truth-helpers": "1.2.0",
+    "ember-let": "0.5.0"    
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
