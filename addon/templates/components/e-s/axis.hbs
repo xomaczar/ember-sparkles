@@ -7,9 +7,11 @@
   skipIdx=responsiveSkipIdx
   xGrid=xGrid
   yGrid=yGrid
+  tickSizeOuter=tickSizeOuter
+  tickValues=tickValues
   ) as |axis|}}
 
-  {{#d3-graph classNames="ember-sparkles--axis" as |d3|}}
+  {{#d3-graph classNames=(union classNames (array class)) as |d3|}}
 
     {{d3.graph (pipe
       (d3-append 'g')

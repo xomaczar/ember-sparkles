@@ -26,7 +26,7 @@ export default Ember.Component.extend({
   didInsertElement() {
     this._super(...arguments);
     Ember.run.scheduleOnce('afterRender', this, 'resize');
-    this.get('resizeService').on('debouncedDidResize', () => this.resize());
+    this.get('resizeService').on('debouncedDidResize', () => Ember.run.scheduleOnce('afterRender', this, 'resize'));
   },
 
   resize() {

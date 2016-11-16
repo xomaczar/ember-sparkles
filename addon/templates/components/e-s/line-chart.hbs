@@ -9,11 +9,12 @@
         (d3-attr 'class' 'line')
         (d3-attr 'd' (pipe
           (r/get 'data')
-          (d3-line xScale yScale xAccessor=inputKey yAccessor=outputKey)
+          (e-s/line xScale yScale xAccessor=inputKey yAccessor=outputKey)
         ))
-        (d3-style 'stroke' (pipe groupKey colorScale))
+
+        (d3-style 'stroke' (get styles 'stroke'))
         (d3-style 'fill' 'none')
-        (d3-style 'stroke-width' '1.5px')
+        (d3-style 'stroke-width' (get styles 'stroke-width'))
       )
 
       update=(pipe
@@ -21,9 +22,9 @@
         (d3-attr 'class' 'line')
         (d3-attr 'd' (pipe
           (r/get 'data')
-          (d3-line xScale yScale xAccessor=inputKey yAccessor=outputKey)
+          (e-s/line xScale yScale xAccessor=inputKey yAccessor=outputKey)
         ))
-        (d3-style 'stroke' (pipe groupKey colorScale))
+        (d3-style 'stroke' (get styles 'stroke'))
       )
 
       exit=(pipe
