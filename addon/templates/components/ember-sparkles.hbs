@@ -12,7 +12,7 @@
       (append innerHeight 0)
     )
     color-scale=(cat-color-scale (or color-scale-type '20b') domain=group-domain)
-    transition=(e-s/transition duration=(or transition-duration 1000) data=data)
+    transition=(e-s/transition duration=(or transition-duration 1000) name="es-sparkle-transition")
     inputKey=(r/get (or input-key 0))
     outputKey=(r/get (or output-key 1))
   ) as |options|}}
@@ -20,7 +20,7 @@
     {{yield (hash
       x-scale=(compute options.x-scale)
       y-scale=(compute options.y-scale)
-      
+
       x-axis=(component 'e-s/axis'
         scale=(compute options.x-scale)
         position='bottom'
@@ -86,6 +86,13 @@
         height=innerHeight
       )
 
+      line-chart-simple=(component 'e-s/line-chart'
+        xScale=(compute options.x-scale)
+        yScale=(compute options.y-scale)
+        width=innerWidth
+        height=innerHeight
+      )
+
       pie-chart=(component 'e-s/pie-chart'
         data=(e-s/pie-data data valueKey=output-key threshold=arc-threshold precision=arc-precision)
         width=innerWidth
@@ -110,9 +117,20 @@
         dy=(or dy 0)
       )
 
+      tooltip-tracker=(component 'e-s/tooltip-tracker'
+        width=innerWidth
+        height=innerHeight
+        xScale=(compute options.x-scale)
+        data=(readonly data)
+        inputKey=(readonly options.inputKey)
+        outputKey=(readonly options.outputKey)
+      )
+
       width=innerWidth
       height=innerHeight
       transition=options.transition
+      xScale=(compute options.x-scale)
+      yScale=(compute options.y-scale)
     )}}
 
   {{/with}}
