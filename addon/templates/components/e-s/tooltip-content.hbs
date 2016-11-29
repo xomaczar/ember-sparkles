@@ -1,0 +1,12 @@
+<rect
+  rx="{{rx}}"
+  ry="{{ry}}"
+  width="{{_contentWidth}}"
+  height="{{_contentHeight}}"
+  x="{{_contentX}}"
+  y="{{y}}"
+  fill="{{fill}}"></rect>
+  {{yield (hash
+    contentWidth=_contentWidth
+    textCenter=(div _contentWidth 2)
+  )}}
