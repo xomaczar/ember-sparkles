@@ -46,19 +46,12 @@ export default Ember.Component.extend({
   didRender() {
     this._super(...arguments);
     scheduleOnce('afterRender', this, this._sizeInnerText);
-    // this._sizeInnerText();
   },
 
   _sizeInnerText() {
-    debugger;
     let text = this.selection.select('text');
     let textLength = text.node() ? text.node().getComputedTextLength() : 0;
-
-    // let rectWidth = textLength;
     this.set('_contentWidth', textLength + this.get('horizontalPadding'));
-    // this.set('_centerX', rectWidth/2);
-    // Find x, y, and width. Height is provided.
-
   },
 
   _contentCenter: computed('_contentWidth', function() {
