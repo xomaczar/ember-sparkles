@@ -65,18 +65,33 @@ export default Ember.Component.extend({
   transform: computed('maxWidth', 'xCenter', '_contentWidth', 'padding', {
     get() {
       let maxWidth = this.get('maxWidth');
+      let contentWidth = this.get('_contentWidth');
       let halfWidth = this.get('_contentWidth') / 2;
       let centeredX = this.get('xCenter');
       let translateX = -halfWidth;
-      //centeredX/2;
+      let bothPadding = this.get('padding.left') + this.get('padding.right');
 
-      if (centeredX < halfWidth) {
-        translateX = -this.get('padding.left');//halfWidth - centeredX;
-      } else if (centeredX + halfWidth > maxWidth) {
-        translateX = -this.get('_contentWidth') + this.get('padding.right');
+      if (centeredX + this.get('padding.right') + this.get('padding.right') < contentWidth) {
+        translateX = -centeredX -this.get('padding.left');
+      }
+      else if (centeredX + contentWidth - bothPadding >= maxWidth) {
+        translateX = maxWidth - centeredX - contentWidth + this.get('padding.right');
+      }
+      else {
+        translateX = -halfWidth;
       }
 
-      return `translate(${translateX}, 0)`
+      //Another way to handle this not as nice.
+      // if (centeredX < halfWidth) {
+      //   console.log('1:centerX', centeredX);
+      //   translateX = -halfWidth;//-this.get('padding.left');//halfWidth - centeredX;
+      // } else if (centeredX + halfWidth > maxWidth) {
+      //   console.log('2:centerX', centeredX + halfWidth);
+      //
+      //   translateX = -this.get('_contentWidth') + this.get('padding.right');
+      // }
+
+      return `translate(${translateX}, 0)`;
     }
   }).readOnly(),
 

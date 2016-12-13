@@ -20,7 +20,7 @@ const tickFilter = (tickFormat, skipIdx) => {
 
 const { String: { capitalize } } = Ember;
 
-export function emberSparklesAxis([ scale ], { position, tickFormat, ticks, width, height, skipIdx=1, xGrid, yGrid, tickSizeOuter, tickValues }) {
+export function emberSparklesAxis([ scale ], { position, tickFormat, ticks, width, height, skipIdx=1, xGrid, yGrid, tickSizeOuter, tickValues, tickPadding}) {
   let axisType = `axis${capitalize(position)}`;
   let axisFn = axis[axisType];
 
@@ -48,6 +48,10 @@ export function emberSparklesAxis([ scale ], { position, tickFormat, ticks, widt
 
   if (typeof tickSizeOuter !== 'undefined') {
     result.tickSizeOuter(tickSizeOuter);
+  }
+
+  if(tickPadding) {
+    result.tickPadding(tickPadding);
   }
 
   return result;

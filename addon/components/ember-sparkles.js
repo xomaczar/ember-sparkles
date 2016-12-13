@@ -30,8 +30,13 @@ export default Ember.Component.extend({
   },
 
   resize() {
-    this.set('width', floor(this.$().innerWidth()));
-    this.set('height', floor(this.$().innerHeight()));
+    let $elem = this.$();
+    if (!$elem) {
+      return;
+    }
+
+    this.set('width', floor($elem.innerWidth()));
+    this.set('height', floor($elem.innerHeight()));
   },
 
   innerWidth: computed('width', 'marginLeft', 'marginRight', function() {
