@@ -65,7 +65,10 @@ export function emberSparklesAxis([ scale ], { position, ticks, tickFormat, tick
 
   result.ticks(ticks);
   result.tickFormat(tickFormat);
-  result.tickValues(tickValues);
+
+  if (tickValues) {
+    result.tickValues(tickValues);
+  }
 
   let innerSize = gridlines ? (-1) * gridLength : tickSizeInner;
   result.tickSizeInner(innerSize);

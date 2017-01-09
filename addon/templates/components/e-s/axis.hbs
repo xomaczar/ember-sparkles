@@ -1,5 +1,5 @@
-{{#let (e-s/axis-options position width height x-translate y-translate) as |options|}}
-{{#let (e-s/axis-helper scale
+{{#with (e-s/axis-options position width height x-translate y-translate) as |options|}}
+{{#with (e-s/axis-helper scale
   position=position
   ticks=ticks
   width=width
@@ -11,6 +11,10 @@
   tickSizeOuter=tickSizeOuter
   tickValues=tickValues
   tickPadding=tickPadding
+
+  gridlines=gridlines
+  gridLength=(get options 'gridLength')
+
   ) as |axis|}}
 
   {{#d3-graph classNames=(union classNames (array class)) as |d3|}}
@@ -46,5 +50,5 @@
 
   {{/d3-graph}}
 
-{{/let}}
-{{/let}}
+{{/with}}
+{{/with}}
