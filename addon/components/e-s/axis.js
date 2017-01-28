@@ -6,5 +6,10 @@ export default Ember.Component.extend({
   tagName: '',
   classNames: ['ember-sparkles--axis'],
 
+  init() {
+    this._super(...arguments);
+    this.classNames = this.classNames.slice();
+  },
+
   'with-transition': true
 });
